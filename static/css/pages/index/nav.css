@@ -1,0 +1,277 @@
+body > .center {
+	width: 1280px;
+	margin: 0 auto;
+}
+
+body > .center > .navbar{
+	float: left;
+	position: fixed;
+	top: 0px;
+	width: 1280px;
+	height: 70px;
+	background-color: #ffffff;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+body > .center > .navbar > .logo {
+	float: left;
+	min-width: 36px;
+	height: 36px;
+	padding-left: 55px;
+	padding-right: 30px;
+	margin-top: 17px;
+	margin-left: 17px;
+	font-size: 20px;
+	line-height: 36px;
+	color: #5b96cd;
+	background-image:  url("../../images/logo.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	border-right: 1px solid #DCDCDC;
+	cursor: pointer;
+}
+
+body > .center > .navbar > .project_name {
+	float: left;
+	width: 300px;
+	margin-left: 30px;
+}
+
+body > .center > .navbar > .project_name > .name {
+	float: left;
+	width: 300px;
+	font-size: 17px;
+	color: #000000;
+	margin-top: 14px;
+}
+
+body > .center > .navbar > .project_name > .version {
+	float: left;
+	width: 300px;
+	font-size: 13px;
+	margin-top: 3px;
+	color: #808080;
+}
+
+
+body > .center > .main {
+	float: left;
+	width: 1280px;
+}
+
+body > .center > .main > .editcolumns {
+	float: left;
+	width: 1280px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn {
+	float: left;
+	width: 426px;
+	height: 100%;
+	background: #f2f2f2;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+body > .center > .main > .editcolumns > .editcolumn:nth-child(2n) {
+	width: 427px;
+	background: #ffffff;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .title {
+	float: left;
+	width: 386px;
+	padding: 20px;
+	font-size: 20px;
+	margin-top: 70px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .newitem {
+	float: left;
+	width: 386px;
+	margin: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-top: 1px solid #DCDCDC;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .newitem > .create_btn {
+	flaot: left;
+	width: 386px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+	color: #5b96cd;
+}
+body > .center > .main > .editcolumns > .editcolumn > .newitem > .create_btn:hover {
+	background-color: #dcdcdc;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list {
+	float: left;
+	width: 386px;
+	margin-left: 20px;
+	padding-top: 0px;
+	border-top: 1px solid #dcdcdc;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .is_empty {
+	float: left;
+	width: 386px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	font-size: 15px;
+	line-height: 16px;
+	text-align: center;
+	color: #808080;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item + .is_empty {
+	display: none;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item {
+	float: left;
+	width: 346px;
+	padding: 20px;
+	font-size: 15px;
+	line-height: 16px;
+	border-top: 1px solid #dcdcdc;
+	cursor: pointer;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item:first-child {
+	border-top: none;
+}
+
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item:hover {
+	background: #dcdcdc;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose {
+	border-top: 1px solid #5b96cd;
+	cursor: pointer;
+	color: #ffffff;
+	background: #5b96cd;
+	border-radius: 3px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose + .item {
+	border-top: none;
+	padding-top: 21px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .name {
+	float: left;
+	width: 330px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .edit_btn {
+	float: left;
+	width: 16px;
+	height: 16px;
+	background-color: none;
+	background-position: 0px 0px;
+	background-repeat: none;
+	cursor: pointer;
+	background-image: url('images/edit_item.png');
+	display: none;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .edit_btn:hover {
+	background-position: 0px -16px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose > .edit_btn {
+	background-image: url('images/edit_item_choose.png');
+	display: inherit;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item:hover > .edit_btn {
+	display: inherit;
+}
+
+body > .center > .main > .editwindows {
+	float: left;
+	width: 1280px;
+	padding-top: 71px;
+}
+
+body > .center > .main > .editwindows > .close_btn {
+	float: right;
+	width: 32px;
+	height: 32px;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('images/edit_item_close.png');
+	background-position: 0px 0px;
+	cursor: pointer;
+	margin: 20px;
+}
+
+body > .center > .main > .editwindows > .close_btn:hover {
+	background-position: 0px -32px;
+}
+
+
+
+body > .center > .main > .editwindows > .editwindow {
+	float: left;
+	margin-left: 390px;
+	width: 500px;
+}
+
+body > .center > .main > .editwindows > .editwindow > .title {
+	float: left;
+	width: 500px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 20px;
+	border-bottom: 1px solid #DCDCDC;	
+}
+
+
+body > .center > .main > .editwindows > .editwindow > .input_pair {
+	float: left;
+	margin-top: 20px;
+}
+
+body > .center > .main > .editwindows > .editwindow > .input_pair > .title {
+	float: left;
+	width: 200px;
+	font-size: 17px;
+	line-height: 39px;
+	color: #808080;
+}
+
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input {
+	float: left;
+	width: 300px;
+	font-size: 15px;
+}
+
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > input[type="text"],
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > textarea,
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > select,
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > label {
+	float: left;
+	width: 300px;
+	font-size: 15px;
+}
+
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > label {
+	margin-top: 11px;
+	margin-left: 10px;
+}
+
+body > .center > .main > .editwindows > .editwindow > .input_pair > .input > input[type="button"] {
+	float: left;
+	width: 300px;
+	font-size: 13px;
+}
+
+
+

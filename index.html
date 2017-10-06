@@ -1,0 +1,215 @@
+<html>
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+		<link rel="stylesheet" type="text/css" href="http://static.quack.su/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="http://static.quack.su/css/default.css" />
+		<link rel="stylesheet" type="text/css" href="http://static.quack.su/css/ui.css" />
+
+		<script src="http://static.quack.su/js/default.js"></script>
+		<script src="http://static.quack.su/js/tools/ui.js"></script>
+
+		<script src="http://static.quack.su/js/lib/jquery.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="static/css/pages/index/nav.css" />
+		<script src="static/js/pages/index/main.js"></script>
+
+		<title>Quack API Generator</title>
+
+	</head>
+	<body>
+
+		<div class="center">
+			<div class="main">
+				<div class="editcolumns">
+					<div class="editcolumn classes">
+						<div class="title">
+							Классы
+						</div>
+						<div class="newitem">
+							<div class="create_btn class">Добавить класс</div>
+						</div>
+						<div class="list">
+
+							<div class="is_empty">Пока нет ни одного класса</div>
+						</div>
+					</div>
+					<div class="editcolumn methods">
+						<div class="title">
+							Методы
+						</div>
+						<div class="newitem">
+							<div class="create_btn method">Добавить метод</div>
+						</div>
+						<div class="list">
+
+							<div class="is_empty">Пока нет ни одного метода</div>
+						</div>
+					</div>
+					<div class="editcolumn params">
+						<div class="title">
+							Переменные
+						</div>
+						<div class="newitem">
+							<div class="create_btn param">Добавить переменную</div>
+						</div>
+						<div class="list">
+
+							<div class="is_empty">Пока нет ни одной переменной</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="editwindows hidden">
+					<div class="editwindow classes hidden">
+						<!--
+							1. Название класса
+							2. Описание класса
+						-->
+
+						<div class="title">Редактирование класса</div>
+
+						<div class="input_pair">
+							<div class="title">Название класса</div>
+							<div class="input"><input class="class_name" type="text" placeholder="Введите название класса..." /></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">Описание класса</div>
+							<div class="input"><textarea class="class_description" placeholder="Введите описание класса..."></textarea></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
+						</div>
+
+						<input type="hidden" class="edit_class_name" value="" />
+ 
+					</div>
+					<div class="editwindow methods hidden">
+						<!--
+							1. Название метода
+							2. Описание метода
+							3. Нужна ли авторизация
+							4. Метод только для администраторов
+							5. Нужен ли доступ к БД
+						-->
+
+						<div class="title">Редактирование метода</div>
+
+						<div class="input_pair">
+							<div class="title">Название метода</div>
+							<div class="input"><input class="method_name" type="text" placeholder="Введите название метода..." /></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">Описание метода</div>
+							<div class="input"><textarea class="method_description" placeholder="Введите описание метода..."></textarea></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input">
+								<input type="checkbox" id="checkbox_is_auth" />
+								<label for="checkbox_is_auth">Метод требует авторизацию</label>
+							</div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input">
+								<input type="checkbox" id="checkbox_is_admin" />
+								<label for="checkbox_is_admin">Метод только для администраторов</label>
+							</div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input">
+								<input type="checkbox" id="checkbox_is_db" />
+								<label for="checkbox_is_db">Метод требует доступ к БД</label>
+							</div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
+						</div>
+
+						<input type="hidden" class="edit_class_name" value="" />
+						<input type="hidden" class="edit_method_name" value="" />
+					</div>
+					<div class="editwindow params hidden">
+
+						<!--
+							1. Название переменной
+							2. Описание переменной
+							3. Тип переменной (int, string)
+							4. Обязательная ли переменная
+						-->
+
+
+						<div class="title">Редактирование переменной</div>
+
+						<div class="input_pair">
+							<div class="title">Название переменной</div>
+							<div class="input"><input class="param_name" type="text" placeholder="Введите название переменной..." /></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">Описание переменной</div>
+							<div class="input"><textarea class="param_description" placeholder="Введите описание переменной..."></textarea></div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">Тип данных</div>
+							<div class="input">
+								<select class="param_type">
+									<option value=1>Int</option>
+									<option value=2>String</option>
+									<option value=3>Array</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input">
+								<input type="checkbox" id="checkbox_optional" />
+								<label for="checkbox_optional">Необязательная переменная</label>
+							</div>
+						</div>
+
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
+						</div>
+
+						<input type="hidden" class="edit_class_name" value="" />
+						<input type="hidden" class="edit_method_name" value="" />
+						<input type="hidden" class="edit_param_name" value="" />
+					</div>
+					<div class="close_btn">
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="navbar">
+				<div class="logo">
+					API Generator
+				</div>
+				<div class="project_name">
+					<div class="name">
+					Название проекта
+					</div>
+					<div class="version">v0.1</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+</html>
