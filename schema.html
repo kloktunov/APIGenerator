@@ -12,8 +12,8 @@
 
 		<script src="https://kloktunov.github.io/static/js/lib/jquery.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="static/css/pages/index/nav.css" />
-		<script src="static/js/pages/index/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="static/css/pages/schema/nav.css" />
+		<script src="static/js/pages/schema/main.js"></script>
 
 		<title>Quack API Generator</title>
 
@@ -85,6 +85,11 @@
 							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
 						</div>
 
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><center><a class="gray delete_btn">Удалить класс</a></center></div>
+						</div>
+
 						<input type="hidden" class="edit_class_name" value="" />
  
 					</div>
@@ -138,6 +143,11 @@
 							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
 						</div>
 
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><center><a class="gray delete_btn">Удалить метод</a></center></div>
+						</div>
+
 						<input type="hidden" class="edit_class_name" value="" />
 						<input type="hidden" class="edit_method_name" value="" />
 					</div>
@@ -186,6 +196,10 @@
 							<div class="title">&nbsp;</div>
 							<div class="input"><input class="save_btn" type="button" value="Сохранить изменения" /></div>
 						</div>
+						<div class="input_pair">
+							<div class="title">&nbsp;</div>
+							<div class="input"><center><a class="gray delete_btn">Удалить переменную</a></center></div>
+						</div>
 
 						<input type="hidden" class="edit_class_name" value="" />
 						<input type="hidden" class="edit_method_name" value="" />
@@ -203,12 +217,19 @@
 				</div>
 				<div class="project_name">
 					<div class="name">
-					Название проекта
+						Название проекта
 					</div>
 					<div class="version">v0.1</div>
 				</div>
+				<div class="buttons">
+					<input type="button" class="cancel load_project" value="Загрузить проект">
+					<input type="button" class="cancel new_project" value="Новый проект">
+					<input type="button" class="save_project" value="Сохранить">
+				</div>
 			</div>
 		</div>
+
+		<div class="windows hidden"></div>
 
 
 	</body>

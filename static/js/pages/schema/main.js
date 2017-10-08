@@ -692,7 +692,7 @@ var UI = {
 
 	onMethodRemove: function (class_name, name){
 
-		if(UI.currentMethodChoose().className == class_name && UI.currentMethodChoose().methodName == method_name){
+		if(UI.currentMethodChoose().className == class_name && UI.currentMethodChoose().methodName == name){
 			UI.closeParamsList();
 		}
 
@@ -775,7 +775,7 @@ var UI = {
 		var classData = APIGenerator.schema.classes[name];
 
 		inputName.value = classData.name;
-		inputDescription.innerText = classData.description;
+		inputDescription.value = classData.description;
 
 		inputHiddenClass.value = classData.name;
 
@@ -794,6 +794,8 @@ var UI = {
 			alert("Не найден  метод");
 			return;
 		}
+
+		console.log(class_name + " " + name);
 
 		var editColumnsElem = document.getElementsByClassName("editcolumns")[0];
 		var editWindowsElem = document.getElementsByClassName("editwindows")[0];
@@ -816,7 +818,7 @@ var UI = {
 		var methodData = classData.methods[name];
 
 		inputName.value = methodData.name;
-		inputDescription.innerHTML = methodData.description;
+		inputDescription.value = methodData.description;
 		checkboxIsAuth.checked = methodData.is_auth;
 		checkboxIsAdmin.checked = methodData.is_admin;
 		checkboxIsDB.checked = methodData.is_db;
@@ -868,7 +870,7 @@ var UI = {
 		var paramData = methodData.params[name];
 
 		inputName.value = paramData.name;
-		inputDescription.innerText = paramData.description;
+		inputDescription.value = paramData.description;
 		selectType.value = paramData.type;
 		checkboxOptional.checked = paramData.optional;
 		
@@ -893,7 +895,7 @@ var UI = {
 
 		var oldClassName = inputHiddenClass.value;
 		var newClassName = inputName.value;
-		var newClassDescription = inputDescription.innerHTML;
+		var newClassDescription = inputDescription.value;
 
 		inputHiddenClass.value = newClassName;
 
@@ -922,7 +924,7 @@ var UI = {
 		var oldMethodName = inputHiddenMethod.value;
 		var className = inputHiddenClass.value;
 		var newMethodName = inputName.value;
-		var newMethodDescription = inputDescription.innerHTML;
+		var newMethodDescription = inputDescription.value;
 		var newIsAuth = checkboxIsAuth.checked;
 		var newIsAdmin = checkboxIsAdmin.checked;
 		var newIsDB = checkboxIsDB.checked;
@@ -955,7 +957,7 @@ var UI = {
 		var className = inputHiddenClass.value;
 		var methodName = inputHiddenMethod.value;
 		var newParamName = inputName.value;
-		var newParamDescription = inputDescription.innerHTML;
+		var newParamDescription = inputDescription.value;
 		var newParamType = selectType.value;
 		var newParamOptional = checkboxOptional.checked;
 
@@ -965,6 +967,55 @@ var UI = {
 
 		UI.closeEditWindow();
 
+	},
+
+	removeClass: function (){
+		var editWindowsElem = document.getElementsByClassName("editwindows")[0];
+		var editWindowClassesElem = editWindowsElem.getElementsByClassName("classes")[0];
+
+		var inputHiddenClass = editWindowClassesElem.getElementsByClassName('edit_class_name')[0];
+
+		var className = inputHiddenClass.value;
+
+		APIGenerator.removeClass(className);
+
+		UI.closeEditWindow();
+
+	},
+
+	removeMethod: function (){
+
+		var editWindowsElem = document.getElementsByClassName("editwindows")[0];
+		var editWindowMethodsElem = editWindowsElem.getElementsByClassName("methods")[0];
+
+		var inputHiddenClass = editWindowMethodsElem.getElementsByClassName('edit_class_name')[0];
+		var inputHiddenMethod = editWindowMethodsElem.getElementsByClassName('edit_method_name')[0];
+
+		var className = inputHiddenClass.value;
+		var methodName = inputHiddenMethod.value;
+		
+		APIGenerator.removeMethod(className, methodName);
+
+		UI.closeEditWindow();
+
+	},
+
+	removeParam: function (){
+
+		var editWindowsElem = document.getElementsByClassName("editwindows")[0];
+		var editWindowParamsElem = editWindowsElem.getElementsByClassName("params")[0];
+
+		var inputHiddenClass = editWindowParamsElem.getElementsByClassName('edit_class_name')[0];
+		var inputHiddenMethod = editWindowParamsElem.getElementsByClassName('edit_method_name')[0];
+		var inputHiddenParam = editWindowParamsElem.getElementsByClassName('edit_param_name')[0];
+
+		var className = inputHiddenClass.value;
+		var methodName = inputHiddenMethod.value;
+		var paramName = inputHiddenParam.value;
+
+		APIGenerator.removeParam(className, methodName, paramName);
+
+		UI.closeEditWindow();
 	},
 
 	closeEditWindow: function (){
@@ -1044,5 +1095,26 @@ $(document).ready(function() {
 	$('.editwindows .editwindow.classes .save_btn').on('click', UI.saveClass);
 	$('.editwindows .editwindow.methods .save_btn').on('click', UI.saveMethod);
 	$('.editwindows .editwindow.params .save_btn').on('click', UI.saveParam);
+
+	$('.editwindows .editwindow.classes .delete_btn').on('click', function (e){
+
+		UI.removeClass();
+
+	});
+
+	$('.editwindows .editwindow.methods .delete_btn').on('click', function (e){
+
+		UI.removeMethod();
+
+	});
+
+	$('.editwindows .editwindow.params .delete_btn').on('click', function(e){
+
+		UI.removeParam();
+
+	});
+
+	$('.navbar .buttons .load_project').on('click', UI.openProject);
+	$('.navbar .buttons .save_project').on('click', UI.saveProject);
 
 });

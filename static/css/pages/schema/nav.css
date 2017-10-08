@@ -54,6 +54,26 @@ body > .center > .navbar > .project_name > .version {
 }
 
 
+body > .center > .navbar > .buttons {
+	float: right;
+	margin-left: 30px;
+}
+
+body > .center > .navbar > .buttons > input[type="button"]{
+	float: left;
+	margin-left: 18px;
+	margin-top: 18px;
+	font-size: 13px;
+}
+
+body > .center > .navbar > .buttons > select {
+	float: left;
+	font-size: 13px;
+	margin-left: 18px;
+	margin-top: 18px;
+	padding: 7px;
+}
+
 body > .center > .main {
 	float: left;
 	width: 1280px;
