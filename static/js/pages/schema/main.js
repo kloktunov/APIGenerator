@@ -54,7 +54,9 @@ var APIGenerator = {
 
 								type: 1,
 
-								optional: false
+								optional: false,
+
+								conditions: []
 
 							}
 						}
@@ -175,7 +177,7 @@ var APIGenerator = {
 		UI.onMethodAdd(class_name, name);
 	},
 
-	addParam: function (class_name, method_name, name, description, type,  optional){
+	addParam: function (class_name, method_name, name, description, type,  optional, conditions){
 		// 1. Проверяем наличие такого класса
 		// 2. Проверяем наличие метода
 		// 2. Проверяем наличие переменной
@@ -201,7 +203,8 @@ var APIGenerator = {
 			name: name,
 			description: description,
 			type: type,
-			optional: optional
+			optional: optional,
+			conditions: conditions
 
 		};
 
@@ -281,7 +284,7 @@ var APIGenerator = {
 
 	},
 
-	editParam: function (old_name, class_name, method_name, name, description, type, optional){
+	editParam: function (old_name, class_name, method_name, name, description, type, optional, conditions){
 		// 1. Проверяем наличие такого класса
 		// 2. Проверяем наличие метода
 		// 3. Проверяем синтаксис
@@ -1083,7 +1086,7 @@ $(document).ready(function() {
 		var class_name = UI.currentMethodChoose().className;
 		var method_name = UI.currentMethodChoose().methodName;
 
-		APIGenerator.addParam(class_name, method_name, "newParam", "newDescription", 1, false);
+		APIGenerator.addParam(class_name, method_name, "newParam", "newDescription", 1, false, []);
 	});
 
 	$('.editwindows .close_btn').on('click', function (e){
