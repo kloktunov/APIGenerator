@@ -1,3 +1,9 @@
+window.onbeforeunload = function(e) {
+  var dialogText = 'Dialog text here';
+  e.returnValue = dialogText;
+  return dialogText;
+};
+
 var APIGenerator = {
 
 	paramTypes: ['int', 'string'],
@@ -17,9 +23,20 @@ var APIGenerator = {
 			// 2. Меняем статус
 			// 3. Снимаем событие
 
-			window.onbeforeunload = null;
-
 			APIGenerator.schema.status  = 0;
+
+			var saveObject = {
+				classes: APIGenerator.schema.classes
+			};
+
+			var saveObjectStr = JSON.stringify(saveObject);
+
+			var a = document.createElement("a");
+		    var file = new Blob([saveObjectStr], {type: "application/json"});
+		    a.href = URL.createObjectURL(file);
+		    a.download = "schema.json";
+		    a.click();
+
 		},
 
 		project: {
@@ -30,51 +47,10 @@ var APIGenerator = {
 			description: "Проект создан для тестирования новой платформы" 
 		},
 
+		newProjectClasses: {"api":{"name":"api","description":"Класс содержит методы для получения информации об текущем API","methods":{"version":{"name":"version","description":"Получает информацию о версии текущего API","is_auth":false,"is_admin":false,"is_db":false,"params":{}}}},"accounts":{"name":"accounts","description":"Класс содержит методы для работы с аккаунтом","methods":{"get":{"name":"get","description":"Получает информацию об аккаунте","is_auth":true,"is_admin":false,"is_db":true,"params":{}}}},"auth":{"name":"auth","description":"Класс содержит в себе методы для работы с авторизацией","methods":{"login":{"name":"login","description":"Метод для авторизации пользователя","is_auth":false,"is_admin":false,"is_db":true,"params":{"login":{"name":"login","description":"Логин входа","type":"2","optional":false,"conditions":[]},"password":{"name":"password","description":"Пароль для входа","type":"2","optional":false,"conditions":[]}}}}},"apps":{"name":"apps","description":"Класс для работы с методами приложений","methods":{}}},
 
 
-		classes: {
-
-			users: {
-				name: "users",
-				description: "Класс содержит в себе методы для работы с пользователями",
-
-				methods: {
-					get: {
-						name: "get",
-						description: "Получает информацию о пользователе по его ID",
-
-						is_auth: true,
-						is_admin: false,
-						is_db: true,
-
-						params: {
-							id: {
-								name: "id",
-								description: "Индивидуальный индентификатор пользователя",
-
-								type: 1,
-
-								optional: false,
-
-								conditions: []
-
-							}
-						}
-					},
-
-				}
-			},
-
-			auth: {
-				name: "auth",
-				description: "Класс содержит в себе методы для работы с авторизацией",
-
-				methods: {
-
-				}
-			}
-
-		}
+		classes: { }
 
 	},
 
@@ -314,6 +290,7 @@ var APIGenerator = {
 		APIGenerator.schema.classes[class_name].methods[method_name].params[name].description = description;
 		APIGenerator.schema.classes[class_name].methods[method_name].params[name].type = type;
 		APIGenerator.schema.classes[class_name].methods[method_name].params[name].optional = optional;
+		APIGenerator.schema.classes[class_name].methods[method_name].params[name].conditions = conditions;
 
 		UI.onParamChange(old_name, class_name, method_name, name);
 
@@ -365,7 +342,7 @@ var APIGenerator = {
 
 		UI.onParamRemove(class_name, method_name, name);
 
-	}
+	},
 
 };
 
@@ -464,6 +441,70 @@ var UI = {
 
 	},
 
+	renderParamCondition: function (type, val){
+
+		var newCondItem = document.createElement('div');
+		newCondItem.className = "input_pair condition";
+
+			var titleNewCondItem = document.createElement('div');
+			titleNewCondItem.className = "title";
+			titleNewCondItem.innerHTML = "&nbsp;";
+
+			var inputNewCondItem = document.createElement('div');
+			inputNewCondItem.className = "input";
+
+				var selectInputNewCondItem = document.createElement('select');
+				selectInputNewCondItem.className = "bottom10 condition_type";
+
+
+					var optionMinLimitInputNewCondItem = document.createElement('option');
+					optionMinLimitInputNewCondItem.value = "min_limit";
+					optionMinLimitInputNewCondItem.innerHTML = "Мин. значение";
+
+					var optionMaxLimitInputNewCondItem = document.createElement('option');
+					optionMaxLimitInputNewCondItem.value = "max_limit";
+					optionMaxLimitInputNewCondItem.innerHTML = "Макс. значение";
+
+					var optionMinLengthInputNewCondItem = document.createElement('option');
+					optionMinLengthInputNewCondItem.value = "min_length";
+					optionMinLengthInputNewCondItem.innerHTML = "Мин. длина";
+
+					var optionMaxLengthInputNewCondItem = document.createElement('option');
+					optionMaxLengthInputNewCondItem.value = "max_length";
+					optionMaxLengthInputNewCondItem.innerHTML = "Макс. длина";
+
+				selectInputNewCondItem.value = type;
+
+				var condValueInputNewCondItem = document.createElement('input');
+				condValueInputNewCondItem.className = "condition_value bottom10";
+				condValueInputNewCondItem.type = "text";
+				condValueInputNewCondItem.placeholder = "Введите значение...";
+				condValueInputNewCondItem.value = val;
+
+				var centerInputNewCondItem = document.createElement('center');
+
+					var removeBtnInputNewCondItem = document.createElement('a');
+					removeBtnInputNewCondItem.className = "gray remove_condition";
+					removeBtnInputNewCondItem.innerHTML = "удалить";
+
+
+		selectInputNewCondItem.appendChild(optionMinLimitInputNewCondItem);
+		selectInputNewCondItem.appendChild(optionMaxLimitInputNewCondItem);
+		selectInputNewCondItem.appendChild(optionMinLengthInputNewCondItem);
+		selectInputNewCondItem.appendChild(optionMaxLengthInputNewCondItem);
+		centerInputNewCondItem.appendChild(removeBtnInputNewCondItem);
+
+		inputNewCondItem.appendChild(selectInputNewCondItem);
+		inputNewCondItem.appendChild(condValueInputNewCondItem);
+		inputNewCondItem.appendChild(centerInputNewCondItem);
+
+
+		newCondItem.appendChild(titleNewCondItem);
+		newCondItem.appendChild(inputNewCondItem);
+
+		return newCondItem;
+	},
+
 	putClassItem: function (item){
 		var classesListDiv = document.getElementsByClassName('classes')[0].getElementsByClassName('list')[0];
 		var isEmptyDiv = classesListDiv.getElementsByClassName("is_empty")[0];
@@ -487,6 +528,32 @@ var UI = {
 		paramsListDiv.insertBefore(item, isEmptyDiv);
 	},
 
+	newProject: function(){
+
+       	APIGenerator.schema.classes = APIGenerator.schema.newProjectClasses;            
+		UI.openProject();
+
+	},
+
+
+	loadProject: function (){
+
+		var fileInput = document.getElementsByClassName('schema_json_file')[0];
+
+		if(fileInput.files.length == 0) return;
+
+		var file = fileInput.files[0];
+
+		var reader = new FileReader();
+        reader.onload = function(event) {
+        	APIGenerator.schema.classes = JSON.parse(event.target.result).classes;            
+			UI.openProject();
+        }
+        
+        reader.readAsText(file);
+
+
+	},
 
 	openProject: function (){
 
@@ -750,7 +817,6 @@ var UI = {
 
 	// open methods
 
-
 	editClass: function (name){
 
 		// 1. Берем данные из схемы API
@@ -859,10 +925,16 @@ var UI = {
 		editWindowsElem.classList.remove('hidden');
 		editWindowParamsElem.classList.remove('hidden');
 
+		var oldCondArray = editWindowParamsElem.getElementsByClassName('condition')
+		for(var i = 0, length = oldCondArray.length; i < length; i++){
+			editWindowParamsElem.removeChild(oldCondArray[0]);
+		}
+
 		var inputName = editWindowParamsElem.getElementsByClassName('param_name')[0];
 		var inputDescription = editWindowParamsElem.getElementsByClassName('param_description')[0];
 		var selectType = editWindowParamsElem.getElementsByClassName('param_type')[0];
 		var checkboxOptional = document.getElementById('checkbox_optional');
+		var ipCreateCondition = editWindowParamsElem.getElementsByClassName('condition_create_btn')[0];
 
 		var inputHiddenClass = editWindowParamsElem.getElementsByClassName('edit_class_name')[0];
 		var inputHiddenMethod = editWindowParamsElem.getElementsByClassName('edit_method_name')[0];
@@ -876,6 +948,34 @@ var UI = {
 		inputDescription.value = paramData.description;
 		selectType.value = paramData.type;
 		checkboxOptional.checked = paramData.optional;
+
+		for(i in paramData.conditions){
+			var cond = paramData.conditions[i];
+
+			var cond_type = cond.type;
+			switch(cond.type){
+				case 'min_limit':
+					cond_value = cond.min;
+				break;
+				case 'max_limit':
+					cond_value = cond.max;
+				break;
+				case 'min_length':
+					cond_value = cond.min;
+				break;
+				case 'max_length':
+					cond_value = cond.max;
+				break;
+				default:
+					console.log(cond_type + ": not valid");
+					continue;
+				break;
+			}
+
+			var condView = UI.renderParamCondition(cond_type, cond_value);
+			editWindowParamsElem.insertBefore(condView, ipCreateCondition);
+
+		}
 		
 		inputHiddenClass.value = classData.name;
 		inputHiddenMethod.value = methodData.name;
@@ -952,6 +1052,8 @@ var UI = {
 		var selectType = editWindowParamsElem.getElementsByClassName('param_type')[0];
 		var checkboxOptional = document.getElementById('checkbox_optional');
 
+		var conditions = document.getElementsByClassName('condition');
+
 		var inputHiddenClass = editWindowParamsElem.getElementsByClassName('edit_class_name')[0];
 		var inputHiddenMethod = editWindowParamsElem.getElementsByClassName('edit_method_name')[0];
 		var inputHiddenParam = editWindowParamsElem.getElementsByClassName('edit_param_name')[0];
@@ -963,10 +1065,44 @@ var UI = {
 		var newParamDescription = inputDescription.value;
 		var newParamType = selectType.value;
 		var newParamOptional = checkboxOptional.checked;
+		var newConditions = [];
+
+		for(var i = 0, length = conditions.length; i < length; i++){
+
+			var condition = conditions[i];
+			var condition_type = condition.getElementsByClassName('condition_type')[0].value;
+			var condition_value = condition.getElementsByClassName('condition_value')[0].value;
+
+			var cond_obj = {
+				type: condition_type
+			};
+
+			switch(condition_type){
+				case 'min_limit':
+					cond_obj['min'] = condition_value;
+				break;
+				case 'max_limit':
+					cond_obj['max'] = condition_value;
+				break;
+				case 'min_length':
+					cond_obj['min'] = condition_value;
+				break;
+				case 'max_length':
+					cond_obj['max'] = condition_value;
+				break;
+				default:
+					console.log(condition_type + ": not valid");
+					continue;
+				break;
+			}
+
+			newConditions.push(cond_obj);
+
+		}
 
 		inputHiddenParam.value = newParamName;
 
-		APIGenerator.editParam(oldParamName, className, methodName, newParamName, newParamDescription, newParamType, newParamOptional);
+		APIGenerator.editParam(oldParamName, className, methodName, newParamName, newParamDescription, newParamType, newParamOptional, newConditions);
 
 		UI.closeEditWindow();
 
@@ -1020,6 +1156,7 @@ var UI = {
 
 		UI.closeEditWindow();
 	},
+
 
 	closeEditWindow: function (){
 
@@ -1117,7 +1254,28 @@ $(document).ready(function() {
 
 	});
 
-	$('.navbar .buttons .load_project').on('click', UI.openProject);
-	$('.navbar .buttons .save_project').on('click', UI.saveProject);
+	$('.editwindows .editwindow.params .condition_create_btn .add_condition').on('click', function(e){
+
+		console.log(1);
+
+		var mParent = $('.editwindows .editwindow.params')[0];
+		var ipConditionCreateBtn = $('.editwindows .editwindow.params .condition_create_btn')[0];
+
+		var newCondition = UI.renderParamCondition("min_limit", "");
+
+		mParent.insertBefore(newCondition, ipConditionCreateBtn);
+
+	});
+
+
+	$('.editwindows .editwindow.params .condition .remove_condition').on('click', function(e){
+
+		UI.removeCondition(e);
+
+	});
+
+	$('.navbar .buttons .load_project').on('click', UI.loadProject);
+	$('.navbar .buttons .new_project').on('click', UI.newProject);
+	$('.navbar .buttons .save_project').on('click', APIGenerator.schema.saveProject);
 
 });

@@ -59,6 +59,17 @@ body > .center > .navbar > .buttons {
 	margin-left: 30px;
 }
 
+body > .center > .navbar > .buttons > input[type="file"]{
+	float: left;
+	padding: 5px;
+	margin-left: 18px;
+	margin-top: 18px;
+	font-size: 13px;
+	border: 1px solid #DCDCDC;
+	border-radius: 3px;
+}
+
+
 body > .center > .navbar > .buttons > input[type="button"]{
 	float: left;
 	margin-left: 18px;
