@@ -1179,31 +1179,47 @@ $(document).ready(function() {
 	$('.editcolumns .editcolumn.classes .list').delegate('.item', 'click', function (e){
 		var className = $(this)[0];
 
-		UI.openMethodsList(className.id.split('_')[1]);
+		var pClassName = className.id.split('_')[1];
+
+		UI.openMethodsList(pClassName);
 	});
 
 	$('.editcolumns .editcolumn.methods .list').delegate('.item', 'click', function (e){
 		var className = $(this)[0];
 
-		UI.openParamsList(className.id.split('_')[1], className.id.split('_')[2]);
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+
+		UI.openParamsList(pClassName, pMethodName);
 	});
 
 	$('.editcolumns .editcolumn.classes .list').delegate('.item .edit_btn', 'click', function (e){
 		var className = $(e.target).parent()[0];
 
-		UI.editClass(className.id.split('_')[1]);
+		var pClassName = className.id.split('_')[1];
+
+		UI.editClass(pClassName);
 	});
 
 	$('.editcolumns .editcolumn.methods .list').delegate('.item .edit_btn', 'click', function (e){
 		var className = $(e.target).parent()[0];
 
-		UI.editMethod(className.id.split('_')[1], className.id.split('_')[2]);
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+
+		UI.editMethod(pClassName, pMethodName);
 	});
 
 	$('.editcolumns .editcolumn.params .list').delegate('.item .edit_btn', 'click', function (e){
 		var className = $(e.target).parent()[0];
 
-		UI.editParam(className.id.split('_')[1], className.id.split('_')[2], className.id.split('_')[3]);
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+		var pParamName = className.id.replace('param_' + pClassName + '_' + pMethodName + '_', '');
+
+		console.log(pClassName + " " + pMethodName + " " + pParamName);
+
+		UI.editParam(pClassName, pMethodName, pParamName);
 	});
 
 	$('.editcolumns .create_btn.class').on('click', function (e){
