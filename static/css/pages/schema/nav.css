@@ -197,7 +197,7 @@ body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose + .it
 
 body > .center > .main > .editcolumns > .editcolumn > .list > .item > .name {
 	float: left;
-	width: 330px;
+	width: 278px;
 }
 
 body > .center > .main > .editcolumns > .editcolumn > .list > .item > .edit_btn {
@@ -210,6 +210,7 @@ body > .center > .main > .editcolumns > .editcolumn > .list > .item > .edit_btn 
 	cursor: pointer;
 	background-image: url('images/edit_item.png');
 	display: none;
+	margin-right: 10px;
 }
 
 body > .center > .main > .editcolumns > .editcolumn > .list > .item > .edit_btn:hover {
@@ -222,6 +223,59 @@ body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose > .ed
 }
 
 body > .center > .main > .editcolumns > .editcolumn > .list > .item:hover > .edit_btn {
+	display: inherit;
+}
+
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .up_btn {
+	float: left;
+	width: 16px;
+	height: 16px;
+	background-color: none;
+	background-position: 0px 0px;
+	background-repeat: none;
+	cursor: pointer;
+	background-image: url('images/uparrow_item.png');
+	display: none;
+	margin-right: 10px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .up_btn:hover {
+	background-position: 0px -16px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose > .up_btn {
+	background-image: url('images/uparrow_item_choose.png');
+	display: inherit;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item:hover > .up_btn {
+	display: inherit;
+}
+
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .down_btn {
+	float: left;
+	width: 16px;
+	height: 16px;
+	background-color: none;
+	background-position: 0px 0px;
+	background-repeat: none;
+	cursor: pointer;
+	background-image: url('images/downarrow_item.png');
+	display: none;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item > .down_btn:hover {
+	background-position: 0px -16px;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item.choose > .down_btn {
+	background-image: url('images/downarrow_item_choose.png');
+	display: inherit;
+}
+
+body > .center > .main > .editcolumns > .editcolumn > .list > .item:hover > .down_btn {
 	display: inherit;
 }
 

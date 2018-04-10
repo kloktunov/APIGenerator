@@ -1,350 +1,3 @@
-window.onbeforeunload = function(e) {
-  var dialogText = 'Dialog text here';
-  e.returnValue = dialogText;
-  return dialogText;
-};
-
-var APIGenerator = {
-
-	paramTypes: ['int', 'string'],
-
-	schema: {
-
-		/*
-			0 - сохранен
-			1 - изменен, но не сохранен
-		*/
-
-		status: 0,
-
-		saveProject: function (){
-
-			// 1. Загружаем данные на сервер
-			// 2. Меняем статус
-			// 3. Снимаем событие
-
-			APIGenerator.schema.status  = 0;
-
-			var saveObject = {
-				classes: APIGenerator.schema.classes
-			};
-
-			var saveObjectStr = JSON.stringify(saveObject);
-
-			var a = document.createElement("a");
-		    var file = new Blob([saveObjectStr], {type: "application/json"});
-		    a.href = URL.createObjectURL(file);
-		    a.download = "schema.json";
-		    a.click();
-
-		},
-
-		project: {
-			id: 1,
-			name: "Тестовый проект",
-			version: 0.1,
-			changeVersion: 144023234,
-			description: "Проект создан для тестирования новой платформы" 
-		},
-
-		newProjectClasses: {"api":{"name":"api","description":"Класс содержит методы для получения информации об текущем API","methods":{"version":{"name":"version","description":"Получает информацию о версии текущего API","is_auth":false,"is_admin":false,"is_db":false,"params":{}},"getClasses":{"name":"getClasses","description":"Возвращает список классов API","is_auth":false,"is_admin":false,"is_db":false,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество классов, которое нужно вывести","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"getClassByName":{"name":"getClassByName","description":"Возвращает информацию о классе по его имени","is_auth":false,"is_admin":false,"is_db":false,"params":{"class_name":{"name":"class_name","description":"Имя класс, о котором мы хотим получить информацию","type":2,"optional":false,"conditions":[]}}},"getMethods":{"name":"getMethods","description":"Возвращает список методов для класса","is_auth":false,"is_admin":false,"is_db":false,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество методов, которое надо вывести","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"getMethodByName":{"name":"getMethodByName","description":"Возвращает информацию о методе по имени","is_auth":false,"is_admin":false,"is_db":false,"params":{"class_name":{"name":"class_name","description":"Имя класса, к которому относится метод","type":2,"optional":false,"conditions":[]},"method_name":{"name":"method_name","description":"Имя метода, о котором мы хотим получить информацию","type":2,"optional":false,"conditions":[]}}},"getParams":{"name":"getParams","description":"Возвращает информацию о параметрах метода","is_auth":false,"is_admin":false,"is_db":false,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество параметров, которое мы хотим получить","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"getParamByName":{"name":"getParamByName","description":"Возвращает информацию о параметра по имени","is_auth":false,"is_admin":false,"is_db":false,"params":{"class_name":{"name":"class_name","description":"Имя класса, к которому относится параметр","type":2,"optional":false,"conditions":[]},"method_name":{"name":"method_name","description":"Имя метода, к которому относится параметр","type":2,"optional":false,"conditions":[]},"param_name":{"name":"param_name","description":"Имя параметра, о котором мы хотим получить информацию","type":2,"optional":false,"conditions":[]}}},"getTypes":{"name":"getTypes","description":"Возвращает список типов данных API","is_auth":false,"is_admin":false,"is_db":false,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":2,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество типов, которое мы хотим получить","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"getTypeByName":{"name":"getTypeByName","description":"Возвращает информацию о тип по его имени","is_auth":false,"is_admin":false,"is_db":false,"params":{"type_name":{"name":"type_name","description":"Имя типа информацию о котором мы хотим получить","type":2,"optional":false,"conditions":[]}}},"getErrorById":{"name":"getErrorById","description":"Возвращает информацию об ошибки по ID","is_auth":false,"is_admin":false,"is_db":false,"params":{"id":{"name":"id","description":"ID ошибки, информацию о которой мы хотим получить","type":1,"optional":false,"conditions":[]}}},"getErrors":{"name":"getErrors","description":"Возвращает список ошибок API","is_auth":false,"is_admin":false,"is_db":false,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество ошибок, которое мы хотим получить","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}}}},"account":{"name":"account","description":"Класс содержит методы для работы с аккаунтом","methods":{"get":{"name":"get","description":"Получает информацию об аккаунте","is_auth":true,"is_admin":false,"is_db":true,"params":{}},"changeLogin":{"name":"changeLogin","description":"Метод изменения логина аккаунта","is_auth":true,"is_admin":false,"is_db":true,"params":{"login":{"name":"login","description":"Логин от аккаунта","type":2,"optional":false,"conditions":[]},"password":{"name":"password","description":"Пароль от аккаунта","type":2,"optional":false,"conditions":[]},"new_login":{"name":"new_login","description":"Новый логин от аккаунта","type":2,"optional":false,"conditions":[]}}},"changePassword":{"name":"changePassword","description":"Метод изменения пароля аккаунта","is_auth":true,"is_admin":false,"is_db":true,"params":{"password":{"name":"password","description":"Пароль от аккаунта","type":2,"optional":false,"conditions":[]},"new_password":{"name":"new_password","description":"Новый пароль от аккаунта","type":2,"optional":false,"conditions":[]}}},"addAccount":{"name":"addAccount","description":"Добавить аккаунт другого сервиса к данному аккаунту","is_auth":true,"is_admin":false,"is_db":true,"params":{"service":{"name":"service","description":"Имя сервиса, которое мы хотим добавить","type":2,"optional":false,"conditions":[]},"request_code":{"name":"request_code","description":"Code для получения access_token сервиса","type":2,"optional":false,"conditions":[]}}},"changeAccount":{"name":"changeAccount","description":"Изменить прикрепленный аккаунт","is_auth":true,"is_admin":false,"is_db":true,"params":{"service":{"name":"service","description":"Имя сервиса, которое нужно изменить","type":2,"optional":false,"conditions":[]},"request_code":{"name":"request_code","description":"Code для получения нового access_token","type":2,"optional":false,"conditions":[]}}},"removeAccount":{"name":"removeAccount","description":"Удалить аккаунт другого сервиса","is_auth":true,"is_admin":false,"is_db":true,"params":{"service":{"name":"service","description":"Имя сервиса, которое нужно удалить","type":2,"optional":false,"conditions":[]}}}}},"signup":{"name":"signup","description":"Класс содержит в себе методы для регистрации нового пользователя","methods":{"newAccount":{"name":"newAccount","description":"Метод создания нового аккаунта","is_auth":false,"is_admin":false,"is_db":true,"params":{"login":{"name":"login","description":"Логин для нового аккаунта","type":2,"optional":false,"conditions":[]},"password":{"name":"password","description":"Пароль для нового аккаунта","type":2,"optional":false,"conditions":[]},"first_name":{"name":"first_name","description":"Имя пользователя для создания аккаунта","type":2,"optional":false,"conditions":[]},"last_name":{"name":"last_name","description":"Фамилия пользователя для нового аккаунта","type":2,"optional":false,"conditions":[]},"captcha_id":{"name":"captcha_id","description":"ID captcha для создания нового аккаунта","type":1,"optional":false,"conditions":[]},"captcha_code":{"name":"captcha_code","description":"Код captcha для создания нового аккаунта","type":2,"optional":false,"conditions":[]}}}}},"auth":{"name":"auth","description":"Класс содержит в себе методы для работы с авторизацией","methods":{"login":{"name":"login","description":"Метод для авторизации пользователя","is_auth":false,"is_admin":false,"is_db":true,"params":{"login":{"name":"login","description":"Логин пользователя","type":2,"optional":false,"conditions":[]},"password":{"name":"password","description":"Пароль пользователя","type":2,"optional":false,"conditions":[]},"captcha_id":{"name":"captcha_id","description":"ID captcha для авторизации пользователя","type":1,"optional":true,"conditions":[{"type":"min_limit","min":0}]},"captcha_code":{"name":"captcha_code","description":"Код captcha для авторизации пользователя","type":2,"optional":true,"conditions":[]}}}}},"admin":{"name":"admin","description":"Класс содержит в себе методы для администрирования","methods":{"banAccount":{"name":"banAccount","description":"Метод блокирует аккаунт","is_auth":true,"is_admin":true,"is_db":true,"params":{"id":{"name":"id","description":"ID аккаунта","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"reason":{"name":"reason","description":"Причина блокировки аккаунта","type":2,"optional":true,"conditions":[]}}},"unbanAccount":{"name":"unbanAccount","description":"Метод для разбана аккаунта","is_auth":true,"is_admin":true,"is_db":true,"params":{"id":{"name":"id","description":"ID аккаунта для разбана","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]}}},"getBanList":{"name":"getBanList","description":"Получить список забаненных пользователей","is_auth":true,"is_admin":true,"is_db":true,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество записей, которое необходимо вернуть","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}}}},"realtime":{"name":"realtime","description":"Класс с методами для работы с сервером realtime","methods":{"getCode":{"name":"getCode","description":"Получить код для авторизации на realtime-сервере","is_auth":true,"is_admin":false,"is_db":true,"params":{}}}},"captcha":{"name":"captcha","description":"Класс для работы с методами captcha","methods":{"get":{"name":"get","description":"Метод возвращает сгенерированную captcha","is_auth":false,"is_admin":false,"is_db":true,"params":{}}}},"users":{"name":"users","description":"Класс для работы с пользователями","methods":{"getById":{"name":"getById","description":"Получить информацию о пользователе по ID","is_auth":false,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID пользователя","type":1,"optional":true,"conditions":[{"type":"min_limit","min":0}]},"screen_name":{"name":"screen_name","description":"Никнейм пользователя","type":2,"optional":true,"conditions":[]}}},"search":{"name":"search","description":"Метод для поиска по пользователям","is_auth":false,"is_admin":false,"is_db":true,"params":{"q":{"name":"q","description":"Строка запроса для поиска по пользователям","type":2,"optional":false,"conditions":[]}}},"follow":{"name":"follow","description":"Подписаться на пользователя","is_auth":true,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID пользователя","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]}}},"unfollow":{"name":"unfollow","description":"Метод для отписки от пользователя","is_auth":true,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID пользователя","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]}}},"getFollows":{"name":"getFollows","description":"Получить список подписок пользователя","is_auth":false,"is_admin":false,"is_db":true,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество записей для выдачи","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"getFollowers":{"name":"getFollowers","description":"Получить список подписчиков пользователя","is_auth":false,"is_admin":false,"is_db":true,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество записей для выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":100}]}}},"isFollow":{"name":"isFollow","description":"Проверить подписан ли текущий пользователь на данного пользователя","is_auth":true,"is_admin":false,"is_db":true,"params":{}}}},"settings":{"name":"settings","description":"Класс для работы с настройками пользователя","methods":{"changeScreenName":{"name":"changeScreenName","description":"Метод для смены никнейма","is_auth":true,"is_admin":false,"is_db":true,"params":{"screen_name":{"name":"screen_name","description":"Новый никнейм для профиля","type":2,"optional":false,"conditions":[]}}},"changeName":{"name":"changeName","description":"Метод для изменения имени пользователя","is_auth":true,"is_admin":false,"is_db":true,"params":{"first_name":{"name":"first_name","description":"Новое имя профиля","type":2,"optional":false,"conditions":[]},"last_name":{"name":"last_name","description":"Новая фамилия профиля","type":2,"optional":false,"conditions":[]}}},"changeSex":{"name":"changeSex","description":"Изменить пол пользователя","is_auth":true,"is_admin":false,"is_db":true,"params":{"sex":{"name":"sex","description":"Новый пол профиля","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":1}]}}},"changeDOB":{"name":"changeDOB","description":"Изменить дату рождения","is_auth":true,"is_admin":false,"is_db":true,"params":{"dob":{"name":"dob","description":"Новая дата рождения в формате ГГГГММДД","type":"1","optional":false,"conditions":[{"type":"min_limit","min":"19000101"}]}}},"changePhoto":{"name":"changePhoto","description":"Изменить фотографию профиля","is_auth":true,"is_admin":false,"is_db":true,"params":{"pid":{"name":"pid","description":"ID фотографии для установки на аватар","type":"1","optional":false,"conditions":[{"type":"min_limit","min":"0"}]},"width_crop":{"name":"width_crop","description":"Ширина для квадрата обрезания","type":"1","optional":false,"conditions":[{"type":"min_limit","min":"0"}]},"x_crop":{"name":"x_crop","description":"X-координата для левого верхнего угла квадрата обрезания","type":"1","optional":false,"conditions":[{"type":"min_limit","min":"0"}]},"y_crop":{"name":"y_crop","description":"Y-координата левого верхнего угла квадрата обрезания","type":"1","optional":false,"conditions":[{"type":"min_limit","min":"0"}]}}},"removePhoto":{"name":"removePhoto","description":"Удалить фотографию профиля","is_auth":true,"is_admin":false,"is_db":true,"params":{}}}},"photos":{"name":"photos","description":"Класс для работы с фотографиями","methods":{"get":{"name":"get","description":"Метод для получения списка фотографий","is_auth":false,"is_admin":false,"is_db":true,"params":{"offset":{"name":"offset","description":"Смещение выборки","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"count":{"name":"count","description":"Количество фотографий, которое необхожимо вернуть","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0},{"type":"max_limit","max":50}]},"sizes":{"name":"sizes","description":"Размеры фотографий, которое необходимо вернуть, через запятую","type":2,"optional":true,"conditions":[]},"album":{"name":"album","description":"Альбом из которого необходимо вернуть фотографии","type":2,"optional":true,"conditions":[]}}},"getById":{"name":"getById","description":"Получение информации о фотографии по ID","is_auth":false,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID фотографии, которой необходимо вернуть","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"sizes":{"name":"sizes","description":"Размеры фотографии, которые необходимо вернуть, через запятую","type":2,"optional":true,"conditions":[]}}},"remove":{"name":"remove","description":"Метод для удаления фотографии","is_auth":true,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID фотографии, которую необходимо удалить","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]}}},"getUploadServer":{"name":"getUploadServer","description":"Получить сервер для загрузки фотографии","is_auth":true,"is_admin":false,"is_db":true,"params":{}},"changeDescription":{"name":"changeDescription","description":"Изменить описание фотографии","is_auth":true,"is_admin":false,"is_db":true,"params":{"id":{"name":"id","description":"ID фотографии, описание которой необходимо изменить","type":1,"optional":false,"conditions":[{"type":"min_limit","min":0}]},"description":{"name":"description","description":"Новое описание фотографии","type":2,"optional":false,"conditions":[]}}}}},"notifications":{"name":"notifications","description":"Класс для работы с уведомленями","methods":{"getCounts":{"name":"getCounts","description":"Возвращает количество уведомлений","is_auth":true,"is_admin":false,"is_db":true,"params":{}},"getEvents":{"name":"getEvents","description":"Возвращает список событий","is_auth":true,"is_admin":false,"is_db":true,"params":{}}}}},
-
-		classes: { }
-
-	},
-
-	// Классы для проверок наличия классов, методов и переменных
-
-	classExists: function (name){
-		return (APIGenerator.schema.classes[name] != undefined);
-	},
-
-	methodExists: function (class_name, name){
-		return (APIGenerator.classExists(class_name) && APIGenerator.schema.classes[class_name].methods[name] != undefined);
-	},
-
-	paramExists: function (class_name, method_name, name){
-		return (APIGenerator.classExists(class_name) && APIGenerator.methodExists(class_name, method_name) && (APIGenerator.schema.classes[class_name].methods[method_name].params[name] != undefined));
-	},
-
-	classTestName: function(name){
-		var patternName = new RegExp("^[a-zA-Z0-9]+$");
-		return patternName.test(name); // true = имя подходит, false = имя не подходит
-	},
-
-	methodTestName: function(name){
-		var patternName = new RegExp("^[a-zA-Z0-9]+$");
-		return patternName.test(name); // true = имя подходит, false = имя не подходит
-	},
-
-	paramTestName: function(name){
-		var patternName = new RegExp("^[a-zA-Z0-9_]+$");
-		return patternName.test(name); // true = имя подходит, false = имя не подходит
-	},
-
-
-
-	// Классы для добавление, редактирования и удаление данных
-
-	addClass: function (name, description){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем синтаксис
-		// 3. Добавляем классы
-
-
-		if(APIGenerator.classExists(name)){
-			alert("Данный класс уже существует");
-			return;
-		}	
-		
-		if(!APIGenerator.classTestName(name)){
-			alert("Некорректное имя класса");
-			return;
-		}
-
-		APIGenerator.schema.classes[name] = {
-			name: name,
-			description: description,
-
-			methods: {
-
-			}
-		};
-
-		UI.onClassAdd(name);
-	},
-
-	addMethod: function (class_name, name, description, is_auth, is_admin, is_db){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем наличие метода
-		// 3. Проверяем синтаксис
-		// 4. Формируем JSON объект
-		// 5. Добавляем описание
-		// 6. Добавляем все флаги
-		// 7. Добавляем объект в схему
-		// 8. Обновляем UI
-
-		if(APIGenerator.methodExists(class_name, name)){
-			alert("Данный метод уже существует");
-			return;
-		}
-
-		if(!APIGenerator.methodTestName(name)){
-			alert("Некорректное имя метода");
-			return;
-		}
-
-
-		APIGenerator.schema.classes[class_name].methods[name] = {
-
-			name: name,
-			description: description,
-			is_auth: is_auth,
-			is_admin: is_admin,
-			is_db: is_db,
-
-			params: {
-
-			}
-
-		};
-
-		UI.onMethodAdd(class_name, name);
-	},
-
-	addParam: function (class_name, method_name, name, description, type,  optional, conditions){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем наличие метода
-		// 2. Проверяем наличие переменной
-		// 3. Проверяем синтаксис
-		// 4. Формируем JSON объект
-		// 5. Добавляем описание
-		// 6. Добавляем все флаги
-		// 7. Добавляем объект в схему
-		// 8. Обновляем UI
-
-		if(APIGenerator.paramExists(class_name, method_name, name)){
-			alert("Данноле поле уже существует");
-			return;
-		}
-
-		if(!APIGenerator.paramTestName(name)){
-			alert("Некорректное имя параметра");
-			return;
-		}
-
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name] = {
-
-			name: name,
-			description: description,
-			type: parseInt(type),
-			optional: optional,
-			conditions: conditions
-
-		};
-
-
-		UI.onParamAdd(class_name, method_name, name);
-
-	},
-
-	editClass: function (old_name, name, description){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем синтаксис
-		// 3. Формируем JSON объект
-		// 4. Добавляем описание
-		// 5. Добавляем все флаги
-		// 6. Добавляем объект в схему
-		// 7. Обновляем UI
-
-		if(!APIGenerator.classExists(old_name)){
-			alert("Данного класса не существует");
-			return;
-		}
-
-
-		if(old_name !== name){
-
-			if(!APIGenerator.classTestName(name)){
-				alert("Некорректное имя класса");
-				return;
-			}
-
-			APIGenerator.schema.classes[name] = APIGenerator.schema.classes[old_name];
-			delete APIGenerator.schema.classes[old_name];
-		}
-
-		APIGenerator.schema.classes[name].name = name;
-		APIGenerator.schema.classes[name].description = description;
-
-		UI.onClassChange(old_name, name);
-
-	},
-
-	editMethod: function  (old_name, class_name, name, description, is_auth, is_admin, is_db){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем наличие метода
-		// 3. Проверяем синтаксис
-		// 4. Формируем JSON объект
-		// 5. Добавляем описание
-		// 6. Добавляем все флаги
-		// 7. Добавляем объект в схему
-		// 8. Обновляем UI
-
-		if(!APIGenerator.methodExists(class_name, old_name)){
-			alert("Данного метода не существует");
-			return;
-		}
-
-
-		if(old_name !== name){
-
-			if(!APIGenerator.methodTestName(name)){
-				alert("Некорректное имя метода");
-				return;
-			}
-
-			APIGenerator.schema.classes[class_name].methods[name] = APIGenerator.schema.classes[class_name].methods[old_name];
-			delete APIGenerator.schema.classes[class_name].methods[old_name];
-		}
-
-		APIGenerator.schema.classes[class_name].methods[name].name = name;
-		APIGenerator.schema.classes[class_name].methods[name].description = description;
-		APIGenerator.schema.classes[class_name].methods[name].is_auth = is_auth;
-		APIGenerator.schema.classes[class_name].methods[name].is_admin = is_admin;
-		APIGenerator.schema.classes[class_name].methods[name].is_db = is_db;
-
-		UI.onMethodChange(old_name, class_name, name);
-
-
-	},
-
-	editParam: function (old_name, class_name, method_name, name, description, type, optional, conditions){
-		// 1. Проверяем наличие такого класса
-		// 2. Проверяем наличие метода
-		// 3. Проверяем синтаксис
-		// 4. Формируем JSON объект
-		// 5. Добавляем описание
-		// 6. Добавляем все флаги
-		// 7. Добавляем объект в схему
-		// 8. Обновляем UI
-
-		if(!APIGenerator.paramExists(class_name, method_name, old_name)){
-			alert("Данного параметра не существует");
-			return;
-		}
-
-		if(old_name !== name){
-			if(!APIGenerator.paramTestName(name)){
-				alert("Некорректное имя параметра");
-				return;
-			}
-
-			APIGenerator.schema.classes[class_name].methods[method_name].params[name] = APIGenerator.schema.classes[class_name].methods[method_name].params[old_name];
-			delete APIGenerator.schema.classes[class_name].methods[method_name].params[old_name];
-
-		}
-
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name].name = name;
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name].description = description;
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name].type = parseInt(type);
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name].optional = optional;
-		APIGenerator.schema.classes[class_name].methods[method_name].params[name].conditions = conditions;
-
-		UI.onParamChange(old_name, class_name, method_name, name);
-
-	},
-
-	removeClass: function (name){
-		// 1. Проверяем наличие такого класса
-		// 2. Удаляем класс
-		// 3. Обновляем UI
-
-		if(!APIGenerator.classExists(name)){
-			alert("Данного класса не существует");
-			return;
-		}
-
-		delete APIGenerator.schema.classes[name];
-
-		UI.onClassRemove(name);
-
-	},
-
-	removeMethod: function (class_name, name){
-		// 1. Проверяем наличие такого метода
-		// 2. Удаляем метод
-		// 3. Обновляем UI
-
-		if(!APIGenerator.methodExists(class_name, name)){
-			alert("Данного метода не существует");
-			return;
-		}
-
-		delete APIGenerator.schema.classes[class_name].methods[name];
-
-		UI.onMethodRemove(class_name, name);
-
-	},
-
-	removeParam: function (class_name, method_name, name){
-		// 1. Проверяем наличие такого параметра
-		// 2. Удаляем параметер
-		// 3. Обновляем UI
-
-		if(!APIGenerator.paramExists(class_name, method_name, name)){
-			alert("Данного параметра не существует");
-			return;
-		}
-
-		delete APIGenerator.schema.classes[class_name].methods[method_name].params[name];
-
-		UI.onParamRemove(class_name, method_name, name);
-
-	},
-
-};
-
 var UI = {
 
 	currentClassChoose: function (){
@@ -387,12 +40,20 @@ var UI = {
 			nameNewItem.className = "name";
 			nameNewItem.innerHTML = name;
 
+			var upBtnNewItem = document.createElement('div');
+			upBtnNewItem.className = "up_btn";
+
+			var downBtnNewItem = document.createElement('div');
+			downBtnNewItem.className = "down_btn";
+
 			var editBtnNewItem = document.createElement('div');
 			editBtnNewItem.className = "edit_btn";
 
 
 		newItem.appendChild(nameNewItem);
+		newItem.appendChild(upBtnNewItem);
 		newItem.appendChild(editBtnNewItem);
+		newItem.appendChild(downBtnNewItem);
 
 		return newItem;
 
@@ -408,12 +69,20 @@ var UI = {
 			nameNewItem.className = "name";
 			nameNewItem.innerHTML = name;
 
+			var upBtnNewItem = document.createElement('div');
+			upBtnNewItem.className = "up_btn";
+
+			var downBtnNewItem = document.createElement('div');
+			downBtnNewItem.className = "down_btn";
+
 			var editBtnNewItem = document.createElement('div');
 			editBtnNewItem.className = "edit_btn";
 
 
 		newItem.appendChild(nameNewItem);
+		newItem.appendChild(upBtnNewItem);
 		newItem.appendChild(editBtnNewItem);
+		newItem.appendChild(downBtnNewItem);
 
 		return newItem;
 
@@ -429,12 +98,20 @@ var UI = {
 			nameNewItem.className = "name";
 			nameNewItem.innerHTML = name;
 
+			var upBtnNewItem = document.createElement('div');
+			upBtnNewItem.className = "up_btn";
+
+			var downBtnNewItem = document.createElement('div');
+			downBtnNewItem.className = "down_btn";
+
 			var editBtnNewItem = document.createElement('div');
 			editBtnNewItem.className = "edit_btn";
 
 
 		newItem.appendChild(nameNewItem);
+		newItem.appendChild(upBtnNewItem);
 		newItem.appendChild(editBtnNewItem);
+		newItem.appendChild(downBtnNewItem);
 
 		return newItem;
 
@@ -472,7 +149,6 @@ var UI = {
 					optionMaxLengthInputNewCondItem.value = "max_length";
 					optionMaxLengthInputNewCondItem.innerHTML = "Макс. длина";
 
-				selectInputNewCondItem.value = type;
 
 				var condValueInputNewCondItem = document.createElement('input');
 				condValueInputNewCondItem.className = "condition_value bottom10";
@@ -485,6 +161,10 @@ var UI = {
 					var removeBtnInputNewCondItem = document.createElement('a');
 					removeBtnInputNewCondItem.className = "gray remove_condition";
 					removeBtnInputNewCondItem.innerHTML = "удалить";
+					removeBtnInputNewCondItem.addEventListener('click', function (){
+						console.log("remove this - " + newCondItem);
+						newCondItem.remove();
+					});
 
 
 		selectInputNewCondItem.appendChild(optionMinLimitInputNewCondItem);
@@ -492,6 +172,8 @@ var UI = {
 		selectInputNewCondItem.appendChild(optionMinLengthInputNewCondItem);
 		selectInputNewCondItem.appendChild(optionMaxLengthInputNewCondItem);
 		centerInputNewCondItem.appendChild(removeBtnInputNewCondItem);
+
+		selectInputNewCondItem.value = type;
 
 		inputNewCondItem.appendChild(selectInputNewCondItem);
 		inputNewCondItem.appendChild(condValueInputNewCondItem);
@@ -1079,21 +761,30 @@ var UI = {
 			switch(condition_type){
 				case 'min_limit':
 					cond_obj['min'] = parseInt(condition_value);
+
+					if(cond_obj['min'] == NaN) continue;
 				break;
 				case 'max_limit':
 					cond_obj['max'] = parseInt(condition_value);
+
+					if(cond_obj['max'] == NaN) continue;
 				break;
 				case 'min_length':
 					cond_obj['min'] = parseInt(condition_value);
+
+					if(cond_obj['min'] == NaN) continue;
 				break;
 				case 'max_length':
 					cond_obj['max'] = parseInt(condition_value);
+
+					if(cond_obj['max'] == NaN) continue;
 				break;
 				default:
 					console.log(condition_type + ": not valid");
 					continue;
 				break;
 			}
+
 
 			newConditions.push(cond_obj);
 
@@ -1163,8 +854,75 @@ var UI = {
 		$('.editwindows').addClass('hidden');
 		$('.editcolumns').removeClass('hidden');
 
-	}
+	},
 
+	classMoveTo: function (class_name, vector){
+		if(!APIGenerator.moveClassTo(class_name, vector)){
+			return;
+		}
+
+		var list = $('.editcolumns .editcolumn.classes .list');
+		var classNode = $('.editcolumns .editcolumn.classes .list #class_' + class_name);
+		var classPos = classNode.index();
+
+		var new_pos = classPos;
+
+		if(vector == "up"){
+			new_pos--;
+			classNode.insertBefore(list.children()[new_pos]);
+		}
+		else {
+			new_pos++;
+			classNode.insertAfter(list.children()[new_pos]);
+		}
+
+
+	},
+
+	methodMoveTo: function (class_name, method_name, vector){
+		if(!APIGenerator.moveMethodTo(class_name, method_name, vector)){
+			return;
+		}
+
+		var list = $('.editcolumns .editcolumn.methods .list');
+		var methodNode = $('.editcolumns .editcolumn.methods .list #method_' + class_name + '_' + method_name);
+		var methodPos = methodNode.index();
+
+		var new_pos = methodPos;
+
+		if(vector == "up"){
+			new_pos--;
+			methodNode.insertBefore(list.children()[new_pos]);
+		}
+		else {
+			new_pos++;
+			methodNode.insertAfter(list.children()[new_pos]);
+		}
+
+
+	},
+
+	paramMoveTo: function (class_name, method_name, param_name, vector){
+		if(!APIGenerator.moveParamTo(class_name, method_name, param_name, vector)){
+			return;
+		}
+
+		var list = $('.editcolumns .editcolumn.params .list');
+		var paramNode = $('.editcolumns .editcolumn.params .list #param_' + class_name + '_' + method_name + '_' + param_name);
+		var paramPos = paramNode.index();
+
+		var new_pos = paramPos;
+
+		if(vector == "up"){
+			new_pos--;
+			paramNode.insertBefore(list.children()[new_pos]);
+		}
+		else {
+			new_pos++;
+			paramNode.insertAfter(list.children()[new_pos]);
+		}
+
+	}
 
 };
 
@@ -1222,15 +980,89 @@ $(document).ready(function() {
 		UI.editParam(pClassName, pMethodName, pParamName);
 	});
 
+	$('.editcolumns .editcolumn.classes .list').delegate('.item .up_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+
+		UI.classMoveTo(pClassName, "up");
+
+		return false;
+	});
+
+	$('.editcolumns .editcolumn.methods .list').delegate('.item .up_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+
+		UI.methodMoveTo(pClassName, pMethodName, "up");
+
+		return false;
+	});
+
+	$('.editcolumns .editcolumn.params .list').delegate('.item .up_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+		var pParamName = className.id.replace('param_' + pClassName + '_' + pMethodName + '_', '');
+
+		console.log(pClassName + " " + pMethodName + " " + pParamName);
+
+		UI.paramMoveTo(pClassName, pMethodName, pParamName, "up");
+
+		return false;
+	});
+
+	$('.editcolumns .editcolumn.classes .list').delegate('.item .down_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+
+		UI.classMoveTo(pClassName, "down");
+
+		return false;
+	});
+
+	$('.editcolumns .editcolumn.methods .list').delegate('.item .down_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+
+		UI.methodMoveTo(pClassName, pMethodName, "down");
+
+		return false;
+	});
+
+	$('.editcolumns .editcolumn.params .list').delegate('.item .down_btn', 'click', function (e){
+		var className = $(e.target).parent()[0];
+
+		var pClassName = className.id.split('_')[1];
+		var pMethodName = className.id.split('_')[2];
+		var pParamName = className.id.replace('param_' + pClassName + '_' + pMethodName + '_', '');
+
+		console.log(pClassName + " " + pMethodName + " " + pParamName);
+
+		UI.paramMoveTo(pClassName, pMethodName, pParamName, "down");
+
+		return false;
+	});
+
 	$('.editcolumns .create_btn.class').on('click', function (e){
 
-		APIGenerator.addClass("newClass", "newDescription");
+		var classesCount = Object.keys(APIGenerator.schema.classes).length;
+
+		APIGenerator.addClass("newClass" + classesCount, "newDescription");
 	});
 
 	$('.editcolumns .create_btn.method').on('click', function (e){
 		var class_name = UI.currentClassChoose().className;
 
-		APIGenerator.addMethod(class_name, "newMethod", "newDescription", false, false, false);
+		var methodsCount = Object.keys(APIGenerator.schema.classes[class_name].methods).length;
+
+		APIGenerator.addMethod(class_name, "newMethod" + methodsCount, "newDescription", false, false, false);
 	});
 
 	$('.editcolumns .create_btn.param').on('click', function (e){
@@ -1238,7 +1070,9 @@ $(document).ready(function() {
 		var class_name = UI.currentMethodChoose().className;
 		var method_name = UI.currentMethodChoose().methodName;
 
-		APIGenerator.addParam(class_name, method_name, "newParam", "newDescription", 1, false, []);
+		var paramsCount = Object.keys(APIGenerator.schema.classes[class_name].methods[method_name].params).length;
+
+		APIGenerator.addParam(class_name, method_name, "newParam" + paramsCount, "newDescription", 1, false, []);
 	});
 
 	$('.editwindows .close_btn').on('click', function (e){

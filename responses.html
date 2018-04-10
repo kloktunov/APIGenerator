@@ -1,5 +1,6 @@
 <html>
 	<head>
+
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 		<link rel="stylesheet" type="text/css" href="https://kloktunov.github.io/static/css/reset.css" />
@@ -12,10 +13,86 @@
 		<script src="https://kloktunov.github.io/static/js/lib/jquery.min.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="static/css/pages/responses/nav.css" />
+
+		<script src="static/js/APIGenerator.js"></script>
 		<script src="static/js/pages/responses/main.js"></script>
+
+		<title>Quack API Generator</title>
 
 	</head>
 	<body>
-		
+
+		<div class="center">
+			<div class="main">	
+				<div class="api_methods">
+					<div class="title">Список методов</div>
+					<div class="classes">
+					</div>
+				</div>
+
+				<div class="response_schema">
+					<div class="fields">
+						<input id="object_url" type="hidden" value="" />
+
+						<div class="title">Поля объекта</div>
+						<div class="list">
+						</div>
+						<div class="funcs">
+							<input type="button" class="add_field cancel" value="Добавить поле" />
+						</div>
+					</div>
+
+					<div class="field_description hidden">
+						<input id="field_url" type="hidden" value="" />
+
+						<div class="title">Описание поля<div class="close"></div></div>
+						<div class="input_pair input">
+							<div class="pair_title">Имя</div>
+							<div class="value"><input id="edit_field_name" type="text" placeholder="Введите имя поля..." /></div>
+						</div>
+						<div class="input_pair input">
+							<div class="pair_title">Тип</div>
+							<div class="value">
+								<select id="edit_field_type">
+									<option>int</option>
+									<option>float</option>
+									<option>string</option>
+									<option>object</option>
+								</select>
+							</div>
+						</div>
+						<div class="input_pair">
+							<div class="pair_title">&nbsp;</div>
+							<div class="value"><input type="checkbox" name="is_array" id="is_array"/><label for="is_array">Массив</label></div>
+						</div>
+						<div class="input_pair">
+							<div class="pair_title">&nbsp;</div>
+							<div class="value"><input type="checkbox" name="is_optional" id="is_optional"/><label for="is_optional">Необязательное поле</label></div>
+						</div>
+						<div class="funcs">
+							<input type="button" class="edit_object cancel hidden bottom10" value="Изменить объект" />
+							<input type="button" class="save_btn" value="Сохранить изменения" />
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			
+			<div class="navbar">
+				<div class="logo">
+					API Generator
+				</div>
+				<div class="buttons">
+					<input type="file" class="schema_json_file" />
+					<input type="button" class="cancel load_project" value="Загрузить проект">
+					<input type="button" class="save_project" value="Сохранить">
+				</div>
+			</div>
+		</div>
+
+		<div class="windows hidden"></div>
+
+
 	</body>
 </html>

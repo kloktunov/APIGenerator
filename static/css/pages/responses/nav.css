@@ -1,0 +1,367 @@
+body > .center {
+	width: 1280px;
+	margin: 0 auto;
+}
+
+body > .center > .navbar{
+	float: left;
+	position: fixed;
+	top: 0px;
+	width: 1280px;
+	height: 70px;
+	background-color: #ffffff;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+body > .center > .navbar > .logo {
+	float: left;
+	min-width: 36px;
+	height: 36px;
+	padding-left: 55px;
+	padding-right: 30px;
+	margin-top: 17px;
+	margin-left: 17px;
+	font-size: 20px;
+	line-height: 36px;
+	color: #5b96cd;
+	background-image:  url("../../images/logo.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	border-right: 1px solid #DCDCDC;
+	cursor: pointer;
+}
+
+body > .center > .navbar > .project_name {
+	float: left;
+	width: 300px;
+	margin-left: 30px;
+}
+
+body > .center > .navbar > .project_name > .name {
+	float: left;
+	width: 300px;
+	font-size: 17px;
+	color: #000000;
+	margin-top: 14px;
+}
+
+body > .center > .navbar > .project_name > .version {
+	float: left;
+	width: 300px;
+	font-size: 13px;
+	margin-top: 3px;
+	color: #808080;
+}
+
+
+body > .center > .navbar > .buttons {
+	float: right;
+	margin-left: 30px;
+}
+
+body > .center > .navbar > .buttons > input[type="file"]{
+	float: left;
+	padding: 5px;
+	margin-left: 18px;
+	margin-top: 18px;
+	font-size: 13px;
+	border: 1px solid #DCDCDC;
+	border-radius: 3px;
+}
+
+
+body > .center > .navbar > .buttons > input[type="button"]{
+	float: left;
+	margin-left: 18px;
+	margin-top: 18px;
+	font-size: 13px;
+}
+
+body > .center > .navbar > .buttons > select {
+	float: left;
+	font-size: 13px;
+	margin-left: 18px;
+	margin-top: 18px;
+	padding: 7px;
+}
+
+body > .center > .main {
+	float: left;
+	width: 1280px;
+}
+
+body > .center > .main > .api_methods {
+	float: left;
+	width: 330px;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: #f2f2f2;
+}
+
+body > .center > .main > .api_methods::-webkit-scrollbar {
+    width: 1px;
+}
+
+.api_methods > .title {
+	float: left;
+	width: 290px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 70px;
+	font-size: 20px;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.api_methods > .classes {
+	float: left;
+	width: 290px;
+	padding-left: 20px;
+	padding-right: 20px;
+
+}
+
+.api_methods > .classes > .class {
+	float: left;
+	width: 290px;
+	font-size: 15px;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.api_methods > .classes > .class > .name {
+	float: left;
+	width: 250px;
+	padding: 20px;
+	font-weight: 600;
+}
+
+.api_methods > .classes > .class > .methods {
+	float: left;
+	width: 290px;
+}
+
+.api_methods > .classes > .class > .methods > .method {
+	float: left;
+	width: 250px;
+	padding: 20px;
+	border-top: 1px dashed #DCDCDC;	
+	cursor: pointer;
+}
+
+.api_methods > .classes > .class > .methods > .method:hover {
+	background-color: #DCDCDC;
+}
+
+.api_methods > .classes > .class > .methods > .method.choose {
+	background-color: #5b95cd;
+	border-radius: 3px;
+	color: #ffffff;
+}
+
+
+body > .center > .main > .response_schema {
+	float: left;
+	width: 950px;
+	min-height: 100%;
+}
+
+.response_schema .fields {
+	float: left;
+	width: 475px;
+	border-right: 1px solid #DCDCDC;
+	min-height: 100%;
+}
+
+.response_schema .fields .title {
+	float: left;
+	width: 435px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 70px;
+	font-size: 20px;
+	line-height: 25px;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.response_schema .fields .title.back {
+	cursor: pointer;
+	width: 400px;
+	padding-left: 35px;
+	background-position: 0px 22px;
+	background-image: url("images/back.png");
+	background-repeat: no-repeat;
+
+}
+
+.response_schema .fields .list {
+	float: left;
+	width: 435px;
+	padding-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.response_schema .fields .list .field {
+	float: left;
+	width: 395px;
+	padding: 20px;
+	font-size: 15px;
+	border-bottom: 1px solid #DCDCDC;
+	cursor: pointer;
+}
+
+.response_schema .fields .list .field.choose {
+	background: #f2f2f2;
+}
+
+.response_schema .fields .list .field .name {
+	float: left;
+}
+
+.response_schema .fields .list .field .type {
+	float: left;
+	color: #808080;
+	min-width: 70px;
+	padding-right: 20px;
+	margin-right: 20px;
+	border-right: 1px solid #DCDCDC;
+}
+
+.response_schema .fields .list .field .func .delete {
+	float: left;
+	width: 18px;
+	height: 18px;
+	background-image: url("images/ic_delete.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+}
+
+.response_schema .fields .list .field  .func .move_up {
+	float: left;
+	width: 18px;
+	height: 18px;
+	background-image: url("images/up_arrow.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.response_schema .fields .list .field  .func .move_down {
+	float: left;
+	width: 18px;
+	height: 18px;
+	background-image: url("images/down_arrow.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.response_schema .fields .list .field .func {
+	float: right;
+	display: none;
+}
+
+
+.response_schema .fields .list .field:hover .func, .response_schema .fields .list .field.choose .func {
+	display: inherit;
+}
+
+.response_schema .fields .list .field.choose {
+	background-color: #ededed;
+}
+
+
+.response_schema .fields .funcs {
+	float: left;
+	width: 435px;
+	padding-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.response_schema .fields .funcs .add_field {
+	float: left;
+	width: 435px;
+	font-size: 13px;
+	padding: 15px;
+}
+
+.response_schema > .field_description {
+	float: left;
+	width: 474px;
+	min-height: 100%;
+}
+
+.response_schema > .field_description > .title {
+	float: left;
+	width: 435px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 70px;
+	font-size: 20px;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.response_schema > .field_description > .title > .close {
+	float: right;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	background-image: url("images/ic_delete.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+
+.response_schema > .field_description > .input_pair {
+	float: left;
+	width: 435px;
+	padding-top: 30px;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 15px;
+}
+
+.response_schema > .field_description > .input_pair > .pair_title {
+	float: left;
+	color: #808080;
+	width: 100px;
+	text-align: right;
+	padding-right: 20px;
+}
+
+.response_schema > .field_description > .input_pair > .value {
+	float: left;
+	color: #808080;
+	width: 215px;
+}
+
+.response_schema > .field_description > .input_pair.input > .pair_title {
+	line-height: 37px;
+}
+
+.response_schema > .field_description > .input_pair.input > .value > input, .response_schema > .field_description > .input_pair.input > .value > select {
+	font-size: 13px; 
+	width: 215px;
+}
+
+.response_schema > .field_description > .funcs {
+	float: left;
+	width: 215px;
+	margin-left: 140px;
+	margin-top: 25px;
+}
+
+.response_schema > .field_description > .funcs > input {
+	font-size: 13px;
+	width: 215px;
+}
